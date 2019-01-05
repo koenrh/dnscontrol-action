@@ -1,0 +1,29 @@
+workflow "Deploy DNS" {
+  on = "push"
+  resolves = ["DNSControl push"]
+}
+
+action "ESLint" {
+  uses = "koenrh/actions/eslint@4bd28abf67573a1b21b0efa07d2fbbc04b32c6af"
+  args = "dnsconfig.js"
+}
+
+action "DNSControl preview" {
+  uses = "koenrh/dnscontrol-action@ec8e8a39a250ccb4368ce9de4888db9511b61740"
+  args = "preview"
+  needs = ["ESLint"]
+  secrets = ["CLOUDFLARE_API_USER", "CLOUDFLARE_API_KEY"]
+}
+
+action "Branch filter" {
+  uses = "actions/bin/filter@b2bea0749eed6beb495a8fa194c071847af60ea1"
+  args = "branch master"
+  needs = ["DNSControl preview"]
+}
+
+action "DNSControl push" {
+  uses = "koenrh/dnscontrol-action@ec8e8a39a250ccb4368ce9de4888db9511b61740"
+  needs = ["Branch filter"]
+  args = "push"
+  secrets = ["CLOUDFLARE_API_KEY", "CLOUDFLARE_API_USER"]
+}
