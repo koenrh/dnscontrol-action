@@ -10,6 +10,10 @@ function setup() {
 
 function teardown() {
   rm creds.json
+
+  unset "${!CLOUDFLARE@}"
+  unset "${!AWS@}"
+  unset "${!DIGITALOCEAN@}"
 }
 
 function assert_key_equals {
@@ -72,4 +76,29 @@ function assert_key_not_exists {
   run "$WORKSPACE/entrypoint.sh"
 
   assert_key_equals ".digitalocean.token" "\$DIGITALOCEAN_OAUTH_TOKEN"
+}
+
+# Route 53
+@test "AWS access key ID and secret access key are set in credentials file" {
+  export AWS_ACCESS_KEY_ID="access_key_foo"
+  export AWS_SECRET_ACCESS_KEY="very_secret"
+
+  run "$WORKSPACE/entrypoint.sh"
+
+  assert_key_equals ".r53.KeyId" "\$AWS_ACCESS_KEY_ID"
+  assert_key_equals ".r53.SecretKey" "\$AWS_SECRET_ACCESS_KEY"
+
+  assert_key_not_exists ".r53.Token"
+}
+
+@test "AWS access keys, and optional session token are set in credentials file" {
+  export AWS_ACCESS_KEY_ID="access_key_foo"
+  export AWS_SECRET_ACCESS_KEY="very_secret"
+  export AWS_SESSION_TOKEN="session_token"
+
+  run "$WORKSPACE/entrypoint.sh"
+
+  assert_key_equals ".r53.KeyId" "\$AWS_ACCESS_KEY_ID"
+  assert_key_equals ".r53.SecretKey" "\$AWS_SECRET_ACCESS_KEY"
+  assert_key_equals ".r53.Token" "\$AWS_SESSION_TOKEN"
 }
