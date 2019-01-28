@@ -1,5 +1,7 @@
 # DNSControl Action
 
+[![GitHubActions](https://img.shields.io/badge/listed%20on-GitHubActions-blue.svg)](https://github-actions.netlify.com/dnscontrol-action)
+
 Deploy your DNS configuration using [GitHub Actions](https://github.com/actions)
 using [DNSControl](https://github.com/StackExchange/dnscontrol/).
 
