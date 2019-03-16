@@ -1,0 +1,6 @@
+---
+language: shell
+script:
+  - script/test
+notifications:
+  email: false
