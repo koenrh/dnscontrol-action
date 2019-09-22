@@ -1,6 +1,6 @@
 ---
 on: push
-name: Test
+name: build
 jobs:
   test:
     name: Run tests

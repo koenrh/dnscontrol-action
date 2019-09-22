@@ -1,5 +1,7 @@
 # DNSControl Action
 
+![](https://github.com/koenrh/dnscontrol-action/workflows/build/badge.svg)
+
 Deploy your DNS configuration using [GitHub Actions](https://github.com/actions)
 using [DNSControl](https://github.com/StackExchange/dnscontrol/).
 
