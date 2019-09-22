@@ -13,11 +13,21 @@ Run the action with the 'check' argument in order to check and validate the `dns
 file. This action does not communicate with the DNS providers, hence does not require
 any secrets to be set.
 
-```workflow
-action "DNSControl check" {
-  uses = "koenrh/dnscontrol-action@master"
-  args = "check"
-}
+```yaml
+name: Check
+
+on: pull_request
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: DNSControl check
+        uses: koenrh/dnscontrol-action@master
+        with:
+          args: check
 ```
 
 ### preview
@@ -26,12 +36,24 @@ Run the action with the 'preview' argument to check what changes need to be made
 It prints out what DNS records are expected to be created, modified or deleted.
 This action requires the secrets for the specified DNS providers.
 
-```workflow
-action "DNSControl preview" {
-  uses = "koenrh/dnscontrol-action@master"
-  args = "preview"
-  secrets = ["CLOUDFLARE_API_USER", "CLOUDFLARE_API_KEY"]
-}
+```yaml
+name: Preview
+
+on: pull_request
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: DNSControl preview
+        uses: koenrh/dnscontrol-action@master
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
+        with:
+          args: preview
 ```
 
 This is the action you probably want to run for each branch so that proposed changes
@@ -43,20 +65,31 @@ Run the action with the 'push' arugment to publish the changes to the specified
 DNS providers.
 
 Running the action with the 'push' argument will publish the changes with the
-specified DNS providers. You should probably only use this command combined with
-the GitHub [Filters action](https://github.com/actions/bin/tree/master/filter#filters-for-github-actions)
-to make sure that only changes in the `master` branch are deployed to production.
+specified DNS providers. The example workflow depicted below contains a filtering
+pattern so that it only runs on the `master` branch.
 
-```workflow
-action "DNSControl push" {
-  uses = "koenrh/dnscontrol-action@master"
-  args = "push"
-  secrets = ["CLOUDFLARE_API_KEY", "CLOUDFLARE_API_USER"]
-}
+```yaml
+name: Push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: DNSControl push
+        uses: koenrh/dnscontrol-action@master
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
+        with:
+          args: push
 ```
-
-You should probably only use this command combined with the GitHub [Filters action](https://github.com/actions/bin/tree/master/filter#filters-for-github-actions)
-to make sure that only changes in the `master` branch are deployed to production.
 
 ## Secrets
 
@@ -122,7 +155,6 @@ set.
 - `NAMECHEAP_API_USER`
 - `NAMECHEAP_API_KEY`
 - `NAMECHEAP_BASE_URL` (optional)
-
 
 ### NS1
 
