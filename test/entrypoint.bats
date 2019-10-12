@@ -43,30 +43,30 @@ function assert_key_not_exists {
 
 # Cloudflare
 @test "Cloudflare API user and key are set in credentials file" {
-  export INPUT_CLOUDFLAREAPIUSER="info@example.com"
-  export INPUT_CLOUDFLAREAPIKEY="foo"
+  export CLOUDFLARE_API_USER="info@example.com"
+  export CLOUDFLARE_API_KEY="foo"
 
   run "$WORKSPACE/entrypoint.sh"
 
-  assert_key_equals ".cloudflare.apiuser" "\$INPUT_CLOUDFLAREAPIUSER"
-  assert_key_equals ".cloudflare.apikey" "\$INPUT_CLOUDFLAREAPIKEY"
+  assert_key_equals ".cloudflare.apiuser" "\$CLOUDFLARE_API_USER"
+  assert_key_equals ".cloudflare.apikey" "\$CLOUDFLARE_API_KEY"
 
   assert_key_not_exists ".cloudflare.accountid"
   assert_key_not_exists ".cloudflare.accountname"
 }
 
 @test "Cloudflare API user and key, and optional account ID and name are set" {
-  export INPUT_CLOUDFLAREAPIUSER="info@example.com"
-  export INPUT_CLOUDFLAREAPIKEY="foo"
-  export INPUT_CLOUDFLAREACCOUNTID="1"
-  export INPUT_CLOUDFLAREACCOUNTNAME="Contoso"
+  export CLOUDFLARE_API_USER="info@example.com"
+  export CLOUDFLARE_API_KEY="foo"
+  export CLOUDFLARE_ACCOUNT_ID="1"
+  export CLOUDFLARE_ACCOUNT_NAME="Contoso"
 
   run "$WORKSPACE/entrypoint.sh"
 
-  assert_key_equals ".cloudflare.apiuser" "\$INPUT_CLOUDFLAREAPIUSER"
-  assert_key_equals ".cloudflare.apikey" "\$INPUT_CLOUDFLAREAPIKEY"
-  assert_key_equals ".cloudflare.accountid" "\$INPUT_CLOUDFLAREACCOUNTID"
-  assert_key_equals ".cloudflare.accountname" "\$INPUT_CLOUDFLAREACCOUNTNAME"
+  assert_key_equals ".cloudflare.apiuser" "\$CLOUDFLARE_API_USER"
+  assert_key_equals ".cloudflare.apikey" "\$CLOUDFLARE_API_KEY"
+  assert_key_equals ".cloudflare.accountid" "\$CLOUDFLARE_ACCOUNT_ID"
+  assert_key_equals ".cloudflare.accountname" "\$CLOUDFLARE_ACCOUNT_NAME"
 }
 
 # DigitalOcean
