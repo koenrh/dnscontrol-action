@@ -1,0 +1,30 @@
+---
+name: Test
+
+on: pull_request
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Run ESLint
+        uses: koenrh/actions/eslint@master
+        with:
+          args: dnsconfig.js
+
+  dnscontrol:
+    name: DNSControl
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Preview
+        uses: koenrh/dnscontrol-action@master
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
+        with:
+          args: preview
