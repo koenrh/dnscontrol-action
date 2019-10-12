@@ -1,0 +1,23 @@
+---
+name: DNSControl Action
+description: Deploy your DNS configuration to multiple providers
+author: Koen Rouwhorst <info@koenrouwhorst.nl>
+branding:
+  icon: cloud
+  color: yellow
+inputs:
+  cloudflareApiUser:
+    description: Cloudflare API user
+    required: false
+  cloudflareApiKey:
+    description: Cloudflare API key
+    required: false
+  cloudflareAccountId:
+    description: Cloudflare account identifier
+    required: false
+  cloudflareAccountName:
+    description: Cloudflare account name
+    required: false
+runs:
+  using: docker
+  image: 'Dockerfile'
