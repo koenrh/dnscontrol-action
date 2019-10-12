@@ -10,16 +10,16 @@ add_key () {
   cat <<< "$(jq "$1 = \"$2\"" < creds.json)" > creds.json
 }
 
-if [[ -n "$CLOUDFLARE_API_USER" && -n "$CLOUDFLARE_API_KEY" ]]
+if [[ -n "$INPUT_CLOUDFLAREAPIUSER" && -n "$INPUT_CLOUDFLAREAPIKEY" ]]
 then
   # NOTE: https://stackexchange.github.io/dnscontrol/providers/cloudflare
-  add_key ".cloudflare.apiuser" "\$CLOUDFLARE_API_USER"
-  add_key ".cloudflare.apikey" "\$CLOUDFLARE_API_KEY"
+  add_key ".cloudflare.apiuser" "\$INPUT_CLOUDFLAREAPIUSER"
+  add_key ".cloudflare.apikey" "\$INPUT_CLOUDFLAREAPIKEY"
 
-  if [[ -n "$CLOUDFLARE_ACCOUNT_ID" && -n "$CLOUDFLARE_ACCOUNT_NAME" ]]
+  if [[ -n "$INPUT_CLOUDFLAREACCOUNTID" && -n "$INPUT_CLOUDFLAREACCOUNTNAME" ]]
   then
-    add_key ".cloudflare.accountid" "\$CLOUDFLARE_ACCOUNT_ID"
-    add_key ".cloudflare.accountname" "\$CLOUDFLARE_ACCOUNT_NAME"
+    add_key ".cloudflare.accountid" "\$INPUT_CLOUDFLAREACCOUNTID"
+    add_key ".cloudflare.accountname" "\$INPUT_CLOUDFLAREACCOUNTNAME"
   fi
 fi
 
