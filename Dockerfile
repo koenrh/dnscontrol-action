@@ -1,4 +1,4 @@
-FROM stackexchange/dnscontrol:v2.9@sha256:36354bc0e988cdc0fd4c9e69dee3408ca6f98014ea1c7220dff1362c1799a904
+FROM stackexchange/dnscontrol@sha256:1dcbcbb72d6c1ed273b3479af9ae1ce75ccc3b0f74b91722f8a4a9f1ccacd9e6
 
 LABEL repository="https://github.com/koenrh/dnscontrol-action"
 LABEL maintainer="Koen Rouwhorst <info@koenrouwhorst.nl>"
@@ -8,9 +8,7 @@ LABEL "com.github.actions.description"="Deploy your DNS configuration to multipl
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk add --no-cache \
-  bash~=4 \
-  jq~=1.6
+RUN apk add --no-cache bash jq
 
 COPY README.md /
 
