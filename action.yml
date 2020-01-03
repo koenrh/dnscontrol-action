@@ -6,6 +6,9 @@ branding:
   icon: cloud
   color: yellow
 inputs:
+  cloudflareApiToken:
+    description: Cloudflare API token
+    required: false
   cloudflareApiUser:
     description: Cloudflare API user
     required: false

@@ -42,6 +42,17 @@ function assert_key_not_exists {
 }
 
 # Cloudflare
+@test "Cloudflare API token is set in credentials file" {
+  export CLOUDFLARE_API_TOKEN="foo-bar-baz"
+
+  run "$WORKSPACE/entrypoint.sh"
+
+  assert_key_equals ".cloudflare.apitoken" "\$CLOUDFLARE_API_TOKEN"
+
+  assert_key_not_exists ".cloudflare.accountid"
+  assert_key_not_exists ".cloudflare.accountname"
+}
+
 @test "Cloudflare API user and key are set in credentials file" {
   export CLOUDFLARE_API_USER="info@example.com"
   export CLOUDFLARE_API_KEY="foo"
