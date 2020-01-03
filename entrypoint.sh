@@ -10,6 +10,7 @@ add_key () {
   cat <<< "$(jq "$1 = \"$2\"" < creds.json)" > creds.json
 }
 
+CLOUDFLARE_API_TOKEN="${INPUT_CLOUDFLAREAPITOKEN:-$CLOUDFLARE_API_TOKEN}"
 CLOUDFLARE_API_USER="${INPUT_CLOUDFLAREAPIUSER:-$CLOUDFLARE_API_USER}"
 CLOUDFLARE_API_KEY="${INPUT_CLOUDFLAREAPIKEY:-$CLOUDFLARE_API_KEY}"
 CLOUDFLARE_ACCOUNT_ID="${INPUT_CLOUDFLAREACCOUNTID:-$CLOUDFLARE_ACCOUNT_ID}"
@@ -53,12 +54,25 @@ SOFTLAYER_API_KEY="${INPUT_SOFTLAYERAPIKEY:-$SOFTLAYER_API_KEY}"
 
 VULTR_TOKEN="${INPUT_VULTRTOKEN:-$VULTR_TOKEN}"
 
-if [[ -n "$CLOUDFLARE_API_USER" && -n "$CLOUDFLARE_API_KEY" ]]
+if [[ -n "$CLOUDFLARE_API_TOKEN" ]]
 then
+  add_key ".cloudflare.apitoken" "\$CLOUDFLARE_API_TOKEN"
+
   # NOTE: https://stackexchange.github.io/dnscontrol/providers/cloudflare
+  if [[ -n "$CLOUDFLARE_ACCOUNT_ID" && -n "$CLOUDFLARE_ACCOUNT_NAME" ]]
+  then
+    add_key ".cloudflare.accountid" "\$CLOUDFLARE_ACCOUNT_ID"
+    add_key ".cloudflare.accountname" "\$CLOUDFLARE_ACCOUNT_NAME"
+  fi
+
+# NOTE: Using the Cloudflare global API key is discouraged as that gives full
+# access to your Cloudflare account.
+elif [[ -n "$CLOUDFLARE_API_USER" && -n "$CLOUDFLARE_API_KEY" ]]
+then
   add_key ".cloudflare.apiuser" "\$CLOUDFLARE_API_USER"
   add_key ".cloudflare.apikey" "\$CLOUDFLARE_API_KEY"
 
+  # NOTE: https://stackexchange.github.io/dnscontrol/providers/cloudflare
   if [[ -n "$CLOUDFLARE_ACCOUNT_ID" && -n "$CLOUDFLARE_ACCOUNT_NAME" ]]
   then
     add_key ".cloudflare.accountid" "\$CLOUDFLARE_ACCOUNT_ID"
