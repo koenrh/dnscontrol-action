@@ -11,7 +11,7 @@ These are the three relevant sub commands to use with this action.
 
 ### check
 
-Run the action with the 'check' argument in order to check and validate the `dnscontrol.js`
+Run the action with the 'check' argument in order to check and validate the `dnsconfig.js`
 file. This action does not communicate with the DNS providers, hence does not require
 any secrets to be set.
 
