@@ -10,11 +10,20 @@ add_key () {
   cat <<< "$(jq "$1 = \"$2\"" < creds.json)" > creds.json
 }
 
+AZURE_SUBSCRIPTION_ID="${INPUT_AZURESUBSCRIPTIONID:-$AZURE_SUBSCRIPTION_ID}"
+AZURE_RESOURCE_GROUP="${INPUT_AZURERESOURCEGROUP:-$AZURE_RESOURCE_GROUP}"
+AZURE_TENANT_ID="${INPUT_AZURETENANTID:-$AZURE_TENANT_ID}"
+AZURE_CLIENT_ID="${INPUT_AZURECLIENTID:-$AZURE_CLIENT_ID}"
+AZURE_CLIENT_SECRET="${INPUT_AZURECLIENTSECRET:-$AZURE_CLIENT_SECRET}"
+
 CLOUDFLARE_API_TOKEN="${INPUT_CLOUDFLAREAPITOKEN:-$CLOUDFLARE_API_TOKEN}"
 CLOUDFLARE_API_USER="${INPUT_CLOUDFLAREAPIUSER:-$CLOUDFLARE_API_USER}"
 CLOUDFLARE_API_KEY="${INPUT_CLOUDFLAREAPIKEY:-$CLOUDFLARE_API_KEY}"
 CLOUDFLARE_ACCOUNT_ID="${INPUT_CLOUDFLAREACCOUNTID:-$CLOUDFLARE_ACCOUNT_ID}"
 CLOUDFLARE_ACCOUNT_NAME="${INPUT_CLOUDFLAREACCOUNTNAME:-$CLOUDFLARE_ACCOUNT_NAME}"
+
+CLOUDNS_AUTH_ID="${INPUT_CLOUDNSAUTHID:-$CLOUDNS_AUTH_ID}"
+CLOUDNS_AUTH_PASSWORD="${INPUT_CLOUDNSPASSWORD:-$CLOUDNS_AUTH_PASSWORD}"
 
 DIGITALOCEAN_OAUTH_TOKEN="${INPUT_DIGITALOCEANOAUTHTOKEN:-$DIGITALOCEAN_OAUTH_TOKEN}"
 
@@ -22,12 +31,18 @@ DNSIMPLE_ACCOUNT_ACCESS_TOKEN="${INPUT_DNSIMPLEACCOUNTACCESSTOKEN:-$DNSIMPLE_ACC
 
 GANDI_API_KEY="${INPUT_GANDIAPIKEY:-$GANDI_API_KEY}"
 
+GANDI_V5_API_KEY="${INPUT_GANDIV5APIKEY:-$GANDI_V5_API_KEY}"
+GANDI_V5_SHARING_ID="${INPUT_GANDIV5SHARINGID:-$GANDI_V5_SHARING_ID}"
+
 GOOGLE_CLOUD_PROJECT_ID="${INPUT_GOOGLECLOUDPROJECTID:-$GOOGLE_CLOUD_PROJECT_ID}"
 GOOGLE_CLOUD_PRIVATE_KEY_ID="${INPUT_GOOGLECLOUDPRIVATEKEYID:-$GOOGLE_CLOUD_PRIVATE_KEY_ID}"
 GOOGLE_CLOUD_PRIVATE_KEY="${INPUT_GOOGLECLOUDPRIVATEKEY:-$GOOGLE_CLOUD_PRIVATE_KEY}"
 GOOGLE_CLOUD_CLIENT_EMAIL="${INPUT_GOOGLECLOUDCLIENTEMAIL:-$GOOGLE_CLOUD_CLIENT_EMAIL}"
 GOOGLE_CLOUD_CLIENT_ID="${INPUT_GOOGLECLOUDCLIENTID:-$GOOGLE_CLOUD_CLIENT_ID}"
 GOOGLE_CLOUD_CLIENT_X509_CERT_URL="${INPUT_GOOGLECLOUDCLIENTX509CERTURL:-$GOOGLE_CLOUD_CLIENT_X509_CERT_URL}"
+
+INTERNETBS_API_KEY="${INPUT_INTERNETBSAPIKEY:-$INTERNETBS_API_KEY}"
+INTERNETBS_PASSWORD="${INPUT_INTERNETBSPASSWORD:-$INTERNETBS_PASSWORD}"
 
 LINODE_ACCESS_TOKEN="${INPUT_LINODEACCESSTOKEN:-$LINODE_ACCESS_TOKEN}"
 
@@ -53,6 +68,17 @@ SOFTLAYER_USERNAME="${INPUT_SOFTLAYERUSERNAME:-$SOFTLAYER_USERNAME}"
 SOFTLAYER_API_KEY="${INPUT_SOFTLAYERAPIKEY:-$SOFTLAYER_API_KEY}"
 
 VULTR_TOKEN="${INPUT_VULTRTOKEN:-$VULTR_TOKEN}"
+
+if [[ -n "$AZURE_SUBSCRIPTION_ID" && -n "$AZURE_RESOURCE_GROUP"
+  && -n "$AZURE_TENANT_ID" && -n "$AZURE_CLIENT_ID" && -n "$AZURE_CLIENT_SECRET" ]]
+then
+  # NOTE: https://stackexchange.github.io/dnscontrol/providers/azuredns
+  add_key ".azuredns_main.SubscriptionID" "\$AZURE_SUBSCRIPTION_ID"
+  add_key ".azuredns_main.ResourceGroup" "\$AZURE_RESOURCE_GROUP"
+  add_key ".azuredns_main.TenantID" "\$AZURE_TENANT_ID"
+  add_key ".azuredns_main.ClientID" "\$AZURE_CLIENT_ID"
+  add_key ".azuredns_main.ClientSecret" "\$AZURE_CLIENT_SECRET"
+fi
 
 if [[ -n "$CLOUDFLARE_API_TOKEN" ]]
 then
@@ -80,6 +106,13 @@ then
   fi
 fi
 
+if [[ -n "$CLOUDNS_AUTH_ID" && -n "$CLOUDNS_AUTH_PASSWORD" ]]
+then
+  # NOTE: https://stackexchange.github.io/dnscontrol/providers/cloudns
+  add_key ".cloudns.auth-id" "\$CLOUDNS_AUTH_ID"
+  add_key ".cloudns.auth-password" "\$CLOUDNS_AUTH_PASSWORD"
+fi
+
 if [[ -n "$DIGITALOCEAN_OAUTH_TOKEN" ]]
 then
   # NOTE: https://stackexchange.github.io/dnscontrol/providers/digitalocean
@@ -98,21 +131,35 @@ then
   add_key ".gandi.apikey" "\$GANDI_API_KEY"
 fi
 
+if [[ -n "$GANDI_V5_API_KEY" && -n "$GANDI_V5_SHARING_ID" ]]
+then
+  # NOTE: https://stackexchange.github.io/dnscontrol/providers/gandi_v5
+  add_key ".gandi_v5.apikey" "\$GANDI_V5_API_KEY"
+  add_key ".gandi_v5.sharing_id" "\$GANDI_V5_SHARING_ID"
+fi
+
 if [[ -n "$GOOGLE_CLOUD_PROJECT_ID" && -n "$GOOGLE_CLOUD_PRIVATE_KEY_ID"
   && -n "$GOOGLE_CLOUD_PRIVATE_KEY" && -n "$GOOGLE_CLOUD_CLIENT_EMAIL"
   && -n "$GOOGLE_CLOUD_CLIENT_ID" && -n "$GOOGLE_CLOUD_CLIENT_X509_CERT_URL" ]]
 then
   # NOTE: https://stackexchange.github.io/dnscontrol/providers/gcloud
   add_key ".gcloud.type" "service_account"
-  add_key ".gcloud.project_id": "\$GOOGLE_CLOUD_PROJECT_ID",
-  add_key ".gcloud.private_key_id": "\$GOOGLE_CLOUD_PRIVATE_KEY_ID",
-  add_key ".gcloud.private_key": "\$GOOGLE_CLOUD_PRIVATE_KEY",
-  add_key ".gcloud.client_email": "\$GOOGLE_CLOUD_CLIENT_EMAIL",
-  add_key ".gcloud.client_id": "\$GOOGLE_CLOUD_CLIENT_ID",
-  add_key ".gcloud.auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  add_key ".gcloud.token_uri": "https://accounts.google.com/o/oauth2/token",
-  add_key ".gcloud.auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  add_key ".gcloud.project_id": "\$GOOGLE_CLOUD_PROJECT_ID"
+  add_key ".gcloud.private_key_id": "\$GOOGLE_CLOUD_PRIVATE_KEY_ID"
+  add_key ".gcloud.private_key": "\$GOOGLE_CLOUD_PRIVATE_KEY"
+  add_key ".gcloud.client_email": "\$GOOGLE_CLOUD_CLIENT_EMAIL"
+  add_key ".gcloud.client_id": "\$GOOGLE_CLOUD_CLIENT_ID"
+  add_key ".gcloud.auth_uri": "https://accounts.google.com/o/oauth2/auth"
+  add_key ".gcloud.token_uri": "https://accounts.google.com/o/oauth2/token"
+  add_key ".gcloud.auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs"
   add_key ".gcloud.client_x509_cert_url": "\$GOOGLE_CLOUD_CLIENT_X509_CERT_URL"
+fi
+
+if [[ -n "$INTERNETBS_API_KEY" && -n "$INTERNETBS_PASSWORD" ]]
+then
+  # NOTE: https://stackexchange.github.io/dnscontrol/providers/internetbs
+  add_key ".internetbs.api-key" "\$INTERNETBS_API_KEY"
+  add_key ".intenretbs.password" "\$INTERNETBS_PASSWORD"
 fi
 
 if [[ -n "$LINODE_ACCESS_TOKEN" ]]

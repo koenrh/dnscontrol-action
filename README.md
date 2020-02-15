@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl check
-        uses: koenrh/dnscontrol-action@v2.10
+        uses: koenrh/dnscontrol-action@v2.11
         with:
           args: check
 ```
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl preview
-        uses: koenrh/dnscontrol-action@v2.10
+        uses: koenrh/dnscontrol-action@v2.11
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl push
-        uses: koenrh/dnscontrol-action@v2.10
+        uses: koenrh/dnscontrol-action@v2.11
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
@@ -98,6 +98,16 @@ jobs:
 Depending on the DNS providers that are used, this action requires secrets to be
 set.
 
+### Azure DNS
+
+[Documentation](https://stackexchange.github.io/dnscontrol/providers/azuredns)
+
+- `AZURE_SUBSCRIPTION_ID`
+- `AZURE_RESOURCE_GROUP`
+- `AZURE_TENANT_ID`
+- `AZURE_CLIENT_ID`
+- `AZURE_CLIENT_SECRET`
+
 ### Cloudflare
 
 [Documentation](https://stackexchange.github.io/dnscontrol/providers/cloudflare)
@@ -106,6 +116,13 @@ set.
 - `CLOUDFLARE_API_KEY`
 - `CLOUDFLARE_ACCOUNT_ID` (optional)
 - `CLOUDFLARE_ACCOUNT_NAME` (optional)
+
+### ClouDNS
+
+[Documentation](https://stackexchange.github.io/dnscontrol/providers/cloudns)
+
+- `CLOUDNS_AUTH_ID`
+- `CLOUDNS_AUTH_PASSWORD`
 
 ### DigitalOcean
 
@@ -125,6 +142,13 @@ set.
 
 - `GANDI_API_KEY`
 
+### Gandi V5
+
+[Documentation](https://stackexchange.github.io/dnscontrol/providers/gandi_v5)
+
+- `GANDI_V5_API_KEY`
+- `GANDI_V5_SHARING_ID`
+
 ### Google CLOUD DNS
 
 [Documentation](https://stackexchange.github.io/dnscontrol/providers/gcloud)
@@ -135,6 +159,10 @@ set.
 - `GOOGLE_CLOUD_CLIENT_EMAIL`
 - `GOOGLE_CLOUD_CLIENT_ID`
 - `GOOGLE_CLOUD_CLIENT_X509_CERT_URL`
+
+### Internet.bs
+
+
 
 ### Linode
 
