@@ -41,6 +41,9 @@ GOOGLE_CLOUD_CLIENT_EMAIL="${INPUT_GOOGLECLOUDCLIENTEMAIL:-$GOOGLE_CLOUD_CLIENT_
 GOOGLE_CLOUD_CLIENT_ID="${INPUT_GOOGLECLOUDCLIENTID:-$GOOGLE_CLOUD_CLIENT_ID}"
 GOOGLE_CLOUD_CLIENT_X509_CERT_URL="${INPUT_GOOGLECLOUDCLIENTX509CERTURL:-$GOOGLE_CLOUD_CLIENT_X509_CERT_URL}"
 
+INTERNETBS_API_KEY="${INPUT_INTERNETBSAPIKEY:-$INTERNETBS_API_KEY}"
+INTERNETBS_PASSWORD="${INPUT_INTERNETBSPASSWORD:-$INTERNETBS_PASSWORD}"
+
 LINODE_ACCESS_TOKEN="${INPUT_LINODEACCESSTOKEN:-$LINODE_ACCESS_TOKEN}"
 
 NAME_COM_API_USER="${INPUT_NAMECOMAPIUSER:-$NAME_COM_API_USER}"
@@ -150,6 +153,13 @@ then
   add_key ".gcloud.token_uri": "https://accounts.google.com/o/oauth2/token"
   add_key ".gcloud.auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs"
   add_key ".gcloud.client_x509_cert_url": "\$GOOGLE_CLOUD_CLIENT_X509_CERT_URL"
+fi
+
+if [[ -n "$INTERNETBS_API_KEY" && -n "$INTERNETBS_PASSWORD" ]]
+then
+  # NOTE: https://stackexchange.github.io/dnscontrol/providers/internetbs
+  add_key ".internetbs.api-key" "\$INTERNETBS_API_KEY"
+  add_key ".intenretbs.password" "\$INTERNETBS_PASSWORD"
 fi
 
 if [[ -n "$LINODE_ACCESS_TOKEN" ]]
