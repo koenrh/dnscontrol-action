@@ -131,14 +131,14 @@ if [[ -n "$GOOGLE_CLOUD_PROJECT_ID" && -n "$GOOGLE_CLOUD_PRIVATE_KEY_ID"
 then
   # NOTE: https://stackexchange.github.io/dnscontrol/providers/gcloud
   add_key ".gcloud.type" "service_account"
-  add_key ".gcloud.project_id": "\$GOOGLE_CLOUD_PROJECT_ID",
-  add_key ".gcloud.private_key_id": "\$GOOGLE_CLOUD_PRIVATE_KEY_ID",
-  add_key ".gcloud.private_key": "\$GOOGLE_CLOUD_PRIVATE_KEY",
-  add_key ".gcloud.client_email": "\$GOOGLE_CLOUD_CLIENT_EMAIL",
-  add_key ".gcloud.client_id": "\$GOOGLE_CLOUD_CLIENT_ID",
-  add_key ".gcloud.auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  add_key ".gcloud.token_uri": "https://accounts.google.com/o/oauth2/token",
-  add_key ".gcloud.auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  add_key ".gcloud.project_id": "\$GOOGLE_CLOUD_PROJECT_ID"
+  add_key ".gcloud.private_key_id": "\$GOOGLE_CLOUD_PRIVATE_KEY_ID"
+  add_key ".gcloud.private_key": "\$GOOGLE_CLOUD_PRIVATE_KEY"
+  add_key ".gcloud.client_email": "\$GOOGLE_CLOUD_CLIENT_EMAIL"
+  add_key ".gcloud.client_id": "\$GOOGLE_CLOUD_CLIENT_ID"
+  add_key ".gcloud.auth_uri": "https://accounts.google.com/o/oauth2/auth"
+  add_key ".gcloud.token_uri": "https://accounts.google.com/o/oauth2/token"
+  add_key ".gcloud.auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs"
   add_key ".gcloud.client_x509_cert_url": "\$GOOGLE_CLOUD_CLIENT_X509_CERT_URL"
 fi
 
