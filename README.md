@@ -98,6 +98,16 @@ jobs:
 Depending on the DNS providers that are used, this action requires secrets to be
 set.
 
+### Azure DNS
+
+[Documentation](https://stackexchange.github.io/dnscontrol/providers/azuredns)
+
+- `AZURE_SUBSCRIPTION_ID`
+- `AZURE_RESOURCE_GROUP`
+- `AZURE_TENANT_ID`
+- `AZURE_CLIENT_ID`
+- `AZURE_CLIENT_SECRET`
+
 ### Cloudflare
 
 [Documentation](https://stackexchange.github.io/dnscontrol/providers/cloudflare)
