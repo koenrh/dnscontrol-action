@@ -125,6 +125,13 @@ set.
 
 - `GANDI_API_KEY`
 
+### Gandi V5
+
+[Documentation](https://stackexchange.github.io/dnscontrol/providers/gandi_v5)
+
+- `GANDI_V5_API_KEY`
+- `GANDI_V5_SHARING_ID`
+
 ### Google CLOUD DNS
 
 [Documentation](https://stackexchange.github.io/dnscontrol/providers/gcloud)
