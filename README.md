@@ -117,6 +117,13 @@ set.
 - `CLOUDFLARE_ACCOUNT_ID` (optional)
 - `CLOUDFLARE_ACCOUNT_NAME` (optional)
 
+### ClouDNS
+
+[Documentation](https://stackexchange.github.io/dnscontrol/providers/cloudns)
+
+- `CLOUDNS_AUTH_ID`
+- `CLOUDNS_AUTH_PASSWORD`
+
 ### DigitalOcean
 
 [Documentation](https://stackexchange.github.io/dnscontrol/providers/digitalocean)
