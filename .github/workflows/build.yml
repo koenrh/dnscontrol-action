@@ -13,10 +13,5 @@ jobs:
         with:
           args: Dockerfile
 
-      - name: Bats
-        uses: koenrh/actions/bats@master
-        with:
-          args: test/*.bats
-
       - name: ShellCheck
         run: shellcheck entrypoint.sh
