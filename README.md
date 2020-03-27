@@ -52,8 +52,7 @@ jobs:
       - name: DNSControl preview
         uses: koenrh/dnscontrol-action@v2.11
         env:
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: preview
 ```
@@ -87,136 +86,28 @@ jobs:
       - name: DNSControl push
         uses: koenrh/dnscontrol-action@v2.11
         env:
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: push
 ```
 
-## Secrets
+## Credentials
 
-Depending on the DNS providers that are used, this action requires secrets to be
-set.
+Depending on the DNS providers that are used, this action requires credentials to
+be set. These secrets can be configured through a file named `creds.json`. You
+should **not** add secrets as plaintext to this file, but use GitHub
+Actions [encrypted secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)
+instead. These encrypted secrets are exposed at runtime as environment variables.
+See the DNSControl [Service Providers](https://stackexchange.github.io/dnscontrol/provider-list)
+documentation for details.
 
-### Azure DNS
+To follow the Cloudflare example, add an encrypted secret named `CLOUDFLARE_API_TOKEN`
+and then define the `creds.json` file as follows.
 
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/azuredns)
-
-- `AZURE_SUBSCRIPTION_ID`
-- `AZURE_RESOURCE_GROUP`
-- `AZURE_TENANT_ID`
-- `AZURE_CLIENT_ID`
-- `AZURE_CLIENT_SECRET`
-
-### Cloudflare
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/cloudflare)
-
-- `CLOUDFLARE_API_USER`
-- `CLOUDFLARE_API_KEY`
-- `CLOUDFLARE_ACCOUNT_ID` (optional)
-- `CLOUDFLARE_ACCOUNT_NAME` (optional)
-
-### ClouDNS
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/cloudns)
-
-- `CLOUDNS_AUTH_ID`
-- `CLOUDNS_AUTH_PASSWORD`
-
-### DigitalOcean
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/digitalocean)
-
-- `DIGITALOCEAN_OAUTH_TOKEN`
-
-### DNSimple
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/dnsimple)
-
-- `DNSIMPLE_ACCOUNT_ACCESS_TOKEN`
-
-### Gandi
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/gandi)
-
-- `GANDI_API_KEY`
-
-### Gandi V5
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/gandi_v5)
-
-- `GANDI_V5_API_KEY`
-- `GANDI_V5_SHARING_ID`
-
-### Google CLOUD DNS
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/gcloud)
-
-- `GOOGLE_CLOUD_PROJECT_ID`
-- `GOOGLE_CLOUD_PRIVATE_KEY_ID`
-- `GOOGLE_CLOUD_PRIVATE_KEY`
-- `GOOGLE_CLOUD_CLIENT_EMAIL`
-- `GOOGLE_CLOUD_CLIENT_ID`
-- `GOOGLE_CLOUD_CLIENT_X509_CERT_URL`
-
-### Internet.bs
-
-
-
-### Linode
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/linode)
-
-- `LINODE_ACCESS_TOKEN`
-
-### Name.com
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/name.com)
-
-- `NAME_COM_API_USER`
-- `NAME_COM_API_KEY`
-- `NAME_COM_API_URL` (optional)
-
-### Namecheap
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/namecheap)
-
-- `NAMECHEAP_API_USER`
-- `NAMECHEAP_API_KEY`
-- `NAMECHEAP_BASE_URL` (optional)
-
-### NS1
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/ns1)
-
-- `NSONE_API_KEY`
-
-### OVH
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/ovh)
-
-- `OVH_APP_KEY`
-- `OVH_APP_SECRET_KEY`
-- `OVH_CONSUMER_KEY`
-
-### Amazon Route 53
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/route53)
-
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `AWS_SESSION_TOKEN` (optional)
-
-### SoftLayer
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/softlayer)
-
-- `SOFTLAYER_USERNAME`
-- `SOFTLAYER_API_KEY`
-
-### Vultr
-
-[Documentation](https://stackexchange.github.io/dnscontrol/providers/vultr)
-
-- `VULTR_TOKEN`
+```json
+{
+  "cloudflare":{
+    "apitoken": "$CLOUDFLARE_API_TOKEN"
+  }
+}
+```
