@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl check
-        uses: koenrh/dnscontrol-action@v2.11
+        uses: koenrh/dnscontrol-action@v3
         with:
           args: check
 ```
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl preview
-        uses: koenrh/dnscontrol-action@v2.11
+        uses: koenrh/dnscontrol-action@v3
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
@@ -84,7 +84,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl push
-        uses: koenrh/dnscontrol-action@v2.11
+        uses: koenrh/dnscontrol-action@v3
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:

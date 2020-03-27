@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: DNSControl push
-        uses: koenrh/dnscontrol-action@v2.11
+        uses: koenrh/dnscontrol-action@v3
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}
