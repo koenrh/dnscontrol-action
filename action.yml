@@ -9,6 +9,9 @@ inputs:
   args:
     description: DNSControl command
     required: true
+outputs:
+  output:
+    description: The output of the dnscontrol command that was executed.
 runs:
   using: docker
   image: 'Dockerfile'
