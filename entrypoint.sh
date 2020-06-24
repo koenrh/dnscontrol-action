@@ -2,7 +2,8 @@
 
 set -eo pipefail
 
-OUTPUT=`sh -c "dnscontrol $1"`
+IFS=
+OUTPUT="$(dnscontrol "$1")"
 
 echo "$OUTPUT"
 
