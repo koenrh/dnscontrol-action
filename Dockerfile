@@ -8,7 +8,7 @@ LABEL "com.github.actions.description"="Deploy your DNS configuration to multipl
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apk add --no-cache bash jq
+RUN apk add --no-cache bash
 
 COPY README.md /
 
