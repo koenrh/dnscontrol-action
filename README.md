@@ -60,6 +60,44 @@ jobs:
 This is the action you probably want to run for each branch so that proposed changes
 could be verified before an authorized person merges these changes into `master`.
 
+#### Pull request comment
+
+Optionally, you could configure your GitHub Action so that the output of the 'preview'
+command is published as a comment to the pull request for the branch containing the
+changes. This saves you several clicks through the menus to get to the output logs
+for the preview job.
+
+```
+ ******************** Domain: example.com
+----- Getting nameservers from: cloudflare
+----- DNS Provider: cloudflare...6 corrections
+#1: CREATE record: @ TXT 1 v=spf1 include:_spf.google.com -all
+#2: CREATE record: @ MX 1 1  aspmx.l.google.com.
+#3: CREATE record: @ MX 1 5  alt1.aspmx.l.google.com.
+#4: CREATE record: @ MX 1 5  alt2.aspmx.l.google.com.
+#5: CREATE record: @ MX 1 10  alt3.aspmx.l.google.com.
+#6: CREATE record: @ MX 1 10  alt4.aspmx.l.google.com.
+----- Registrar: none...0 corrections
+Done. 6 corrections.
+```
+
+Provided that your GitHub Action job for 'preview' is named `preview`, you could
+use the following snippet to enable pull request comments using Unsplash's [comment-on-pr](https://github.com/unsplash/comment-on-pr)
+GitHub Action.
+
+```yaml
+- name: Preview pull request comment
+  uses: unsplash/comment-on-pr@v1.2.0
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    msg: |
+      ```
+      ${{ steps.preview.outputs.output }}
+      ```
+    check_for_duplicate_msg: true
+```
+
 ### push
 
 Run the action with the 'push' arugment to publish the changes to the specified
