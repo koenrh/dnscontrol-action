@@ -8,7 +8,7 @@ jobs:
     name: ESLint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
 
       - name: Run ESLint
         uses: koenrh/actions/eslint@master
@@ -19,7 +19,7 @@ jobs:
     name: DNSControl
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
 
       - name: Preview
         uses: koenrh/dnscontrol-action@v3
