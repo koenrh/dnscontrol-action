@@ -58,7 +58,8 @@ jobs:
 ```
 
 This is the action you probably want to run for each branch so that proposed changes
-could be verified before an authorized person merges these changes into `master`.
+could be verified before an authorized person merges these changes into the default
+branch.
 
 #### Pull request comment
 
@@ -105,7 +106,7 @@ DNS providers.
 
 Running the action with the 'push' argument will publish the changes with the
 specified DNS providers. The example workflow depicted below contains a filtering
-pattern so that it only runs on the `master` branch.
+pattern so that it only runs on the default branch.
 
 ```yaml
 name: Push
@@ -113,7 +114,7 @@ name: Push
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   push:
