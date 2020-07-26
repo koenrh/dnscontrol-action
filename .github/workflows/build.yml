@@ -6,7 +6,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
 
       - name: Dockerfilelint
         uses: docker://replicated/dockerfilelint
