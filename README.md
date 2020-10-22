@@ -30,6 +30,7 @@ jobs:
         uses: koenrh/dnscontrol-action@v3
         with:
           args: check
+          working_dir: '.' #  optional path to dnsconfig.js.
 ```
 
 ### preview
@@ -56,6 +57,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: preview
+          working_dir: '.' #  optional path to dnsconfig.js.
 ```
 
 This is the action you probably want to run for each branch so that proposed changes
@@ -130,6 +132,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: push
+          working_dir: '.' #  optional path to dnsconfig.js.
 ```
 
 ## Credentials
