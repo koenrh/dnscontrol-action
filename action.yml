@@ -9,6 +9,10 @@ inputs:
   args:
     description: DNSControl command
     required: true
+  working_dir:
+    description: Working directory location of dnsconfig.js
+    required: false
+    default: '.'
 outputs:
   output:
     description: The output of the dnscontrol command that was executed.
