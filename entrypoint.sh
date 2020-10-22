@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+cd "$INPUT_WORKING_DIR"
+
 IFS=
 OUTPUT="$(dnscontrol "$1")"
 
