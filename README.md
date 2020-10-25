@@ -51,6 +51,7 @@ jobs:
 
       - name: DNSControl preview
         uses: koenrh/dnscontrol-action@v3
+        id: dnscontrol_preview
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
@@ -82,8 +83,9 @@ for the preview job.
 Done. 6 corrections.
 ```
 
-Provided that your GitHub Action job for 'preview' is named `preview`, you could
-use the following snippet to enable pull request comments using Unsplash's [comment-on-pr](https://github.com/unsplash/comment-on-pr)
+Provided that your GitHub Action job for 'preview' has an id
+`dnscontrol_preview`, you could use the following snippet to enable pull request
+comments using Unsplash's [comment-on-pr](https://github.com/unsplash/comment-on-pr)
 GitHub Action.
 
 ```yaml
@@ -94,7 +96,7 @@ GitHub Action.
   with:
     msg: |
       ```
-      ${{ steps.preview.outputs.output }}
+      ${{ steps.dnscontrol_preview.outputs.output }}
       ```
     check_for_duplicate_msg: true
 ```
