@@ -2,10 +2,8 @@
 
 set -eo pipefail
 
-cd "$INPUT_WORKING_DIR"
-
 IFS=
-OUTPUT="$(dnscontrol "$1")"
+OUTPUT="$(dnscontrol "$1" --config "$INPUT_DNSCONTROL_CONFIG_FILE" --cred "$INPUT_DNSCONTROL_CREDS_FILE")"
 
 echo "$OUTPUT"
 
