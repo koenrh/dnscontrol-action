@@ -3,7 +3,7 @@
 set -eo pipefail
 
 IFS=
-OUTPUT="$(dnscontrol "$1" --config "$INPUT_DNSCONTROL_CONFIG_FILE" --cred "$INPUT_DNSCONTROL_CREDS_FILE")"
+OUTPUT="$(dnscontrol "$1" --config "$INPUT_DNSCONTROL_CONFIG_FILE" --creds "$INPUT_DNSCONTROL_CREDS_FILE")"
 
 echo "$OUTPUT"
 
