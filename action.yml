@@ -9,8 +9,12 @@ inputs:
   args:
     description: DNSControl command
     required: true
-  working_dir:
-    description: Working directory location of dnsconfig.js
+  dnscontrol_config_file:
+    description: Path to DNS configuration file.
+    required: false
+    default: '.'
+  dnscontrol_creds_file:
+    description: Path to DNS credentials file.
     required: false
     default: '.'
 outputs:
