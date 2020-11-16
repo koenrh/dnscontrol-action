@@ -3,10 +3,11 @@
 set -eo pipefail
 
 WORKING_DIR="${INPUT_DNSCONTROL_CONFIG_FILE%/*}"
+CONFIG_FILE="$(basename ${INPUT_DNSCONTROL_CONFIG_FILE})"
 cd "$WORKING_DIR"
 
 IFS=
-OUTPUT="$(dnscontrol "$1" --creds "$INPUT_DNSCONTROL_CREDS_FILE")"
+OUTPUT="$(dnscontrol "$1" --config "$CONFIG_FILE" --creds "$INPUT_DNSCONTROL_CREDS_FILE")"
 
 echo "$OUTPUT"
 
