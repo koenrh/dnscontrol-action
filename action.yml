@@ -10,13 +10,13 @@ inputs:
     description: DNSControl command
     required: true
   dnscontrol_config_file:
-    description: Path to DNS configuration file.
+    description: Path to DNSControl configuration file.
     required: false
-    default: '.'
+    default: 'dnsconfig.js'
   dnscontrol_creds_file:
-    description: Path to DNS credentials file.
+    description: Path to DNSControl credentials file.
     required: false
-    default: '.'
+    default: 'creds.json'
 outputs:
   output:
     description: The output of the dnscontrol command that was executed.
