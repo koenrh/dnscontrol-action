@@ -9,11 +9,11 @@ inputs:
   args:
     description: DNSControl command
     required: true
-  dnscontrol_config_file:
+  config_file:
     description: Path to DNSControl configuration file.
     required: false
     default: 'dnsconfig.js'
-  dnscontrol_creds_file:
+  creds_file:
     description: Path to DNSControl credentials file.
     required: false
     default: 'creds.json'
