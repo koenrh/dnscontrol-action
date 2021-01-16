@@ -30,8 +30,11 @@ jobs:
         uses: koenrh/dnscontrol-action@v3
         with:
           args: check
-          dnscontrol_config_file: '.' #  optional path to dnsconfig.js.
-          dnscontrol_creds_file: '.' #  optional path to creds.json.
+
+          # Optionally, if your DNSConfig files are in a non-default location,
+          # you could specify the paths to the config and credentials file.
+          config_file: 'dns/dnsconfig.js'
+          creds_file: 'dns/creds.json'
 ```
 
 ### preview
@@ -57,8 +60,11 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: preview
-          dnscontrol_config_file: '.' #  optional path to dnsconfig.js.
-          dnscontrol_creds_file: '.' #  optional path to creds.json.
+
+          # Optionally, if your DNSConfig files are in a non-default location,
+          # you could specify the paths to the config and credentials file.
+          config_file: 'dns/dnscontrol.js'
+          creds_file: 'dns/creds.json'
 ```
 
 This is the action you probably want to run for each branch so that proposed changes
@@ -132,8 +138,11 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         with:
           args: push
-          dnscontrol_config_file: '.' #  optional path to dnsconfig.js.
-          dnscontrol_creds_file: '.' #  optional path to creds.json.
+
+          # Optionally, if your DNSConfig files are in a non-default location,
+          # you could specify the paths to the config and credentials file.
+          config_file: 'dns/dnsconfig.js'
+          creds_file: 'dns/creds.json'
 ```
 
 ## Credentials
