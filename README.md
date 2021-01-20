@@ -34,7 +34,6 @@ jobs:
           # Optionally, if your DNSConfig files are in a non-default location,
           # you could specify the paths to the config and credentials file.
           config_file: 'dns/dnsconfig.js'
-          creds_file: 'dns/creds.json'
 ```
 
 ### preview
