@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -o pipefail
 
 # Resolve to full paths
 CONFIG_ABS_PATH="$(readlink -f "${INPUT_CONFIG_FILE}")"
@@ -10,7 +10,7 @@ WORKING_DIR="$(dirname "${CONFIG_ABS_PATH}")"
 cd "$WORKING_DIR"
 
 ARGS=(
-  "$1"
+  "$@"
    --config "$CONFIG_ABS_PATH"
 )
 
@@ -21,6 +21,7 @@ fi
 
 IFS=
 OUTPUT="$(dnscontrol "${ARGS[@]}")"
+EXIT_CODE="$?"
 
 echo "$OUTPUT"
 
@@ -30,3 +31,4 @@ OUTPUT="${OUTPUT//$'\n'/'%0A'}"
 OUTPUT="${OUTPUT//$'\r'/'%0D'}"
 
 echo "::set-output name=output::$OUTPUT"
+exit $EXIT_CODE
