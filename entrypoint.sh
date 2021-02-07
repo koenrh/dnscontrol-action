@@ -7,7 +7,7 @@ CONFIG_ABS_PATH="$(readlink -f "${INPUT_CONFIG_FILE}")"
 CREDS_ABS_PATH="$(readlink -f "${INPUT_CREDS_FILE}")"
 
 WORKING_DIR="$(dirname "${CONFIG_ABS_PATH}")"
-cd "$WORKING_DIR"
+cd "$WORKING_DIR" || exit
 
 ARGS=(
   "$@"
