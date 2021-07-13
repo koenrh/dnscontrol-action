@@ -105,7 +105,7 @@ GitHub Action.
   with:
     msg: |
       ```
-      ${{ steps.dnscontrol_preview.outputs.output }}
+      ${{ steps.dnscontrol_preview.outputs.preview_comment }}
       ```
     check_for_duplicate_msg: true
 ```
