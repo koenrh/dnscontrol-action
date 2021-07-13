@@ -30,5 +30,10 @@ OUTPUT="${OUTPUT//'%'/'%25'}"
 OUTPUT="${OUTPUT//$'\n'/'%0A'}"
 OUTPUT="${OUTPUT//$'\r'/'%0D'}"
 
+# Filter output to reduce 'preview' PR comment length
+FILTERED_OUTPUT="$(echo "$OUTPUT" | bin/filter-preview.sh)"
+
 echo "::set-output name=output::$OUTPUT"
+echo "::set-output name=preview_comment::$FILTERED_OUTPUT"
+
 exit $EXIT_CODE
