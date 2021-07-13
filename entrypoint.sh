@@ -2,6 +2,17 @@
 
 set -o pipefail
 
+escape() {
+  local input="$1"
+
+  # https://github.community/t/set-output-truncates-multiline-strings/16852/3
+  input="${input//'%'/'%25'}"
+  input="${input//$'\n'/'%0A'}"
+  input="${input//$'\r'/'%0D'}"
+
+  echo "$input"
+}
+
 # Resolve to full paths
 CONFIG_ABS_PATH="$(readlink -f "${INPUT_CONFIG_FILE}")"
 CREDS_ABS_PATH="$(readlink -f "${INPUT_CREDS_FILE}")"
@@ -25,10 +36,13 @@ EXIT_CODE="$?"
 
 echo "$OUTPUT"
 
-# https://github.community/t/set-output-truncates-multiline-strings/16852/3
-OUTPUT="${OUTPUT//'%'/'%25'}"
-OUTPUT="${OUTPUT//$'\n'/'%0A'}"
-OUTPUT="${OUTPUT//$'\r'/'%0D'}"
+# Filter output to reduce 'preview' PR comment length
+FILTERED_OUTPUT="$(echo "$OUTPUT" | /filter-preview-output.sh)"
+
+OUTPUT="$(escape "$OUTPUT")"
+FILTERED_OUTPUT="$(escape "$FILTERED_OUTPUT")"
 
 echo "::set-output name=output::$OUTPUT"
+echo "::set-output name=preview_comment::$FILTERED_OUTPUT"
+
 exit $EXIT_CODE
