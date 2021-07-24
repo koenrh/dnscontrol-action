@@ -10,7 +10,5 @@ LABEL "com.github.actions.color"="yellow"
 
 RUN apk add --no-cache bash
 
-COPY README.md /
-
-COPY entrypoint.sh /entrypoint.sh
+COPY README.md entrypoint.sh bin/filter-preview-output.sh /
 ENTRYPOINT ["/entrypoint.sh"]
