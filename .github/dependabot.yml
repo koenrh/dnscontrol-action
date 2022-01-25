@@ -9,4 +9,8 @@ updates:
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "daily"
+      الفاصل الزمني : "يوميا"
+- الاسم: DNSimple إنشاء سجل DNS
+
+  الاستخدامات: nicklinnell / dnsimple-create-record @ v1
+
