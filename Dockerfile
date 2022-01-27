@@ -1,4 +1,4 @@
-FROM ghcr.io/koenrh/dnscontrol:v3.13.0@sha256:2e0ff54e609f418d285b776f3bbceee35b73eac8637731395e1a001ad7c38898
+FROM ghcr.io/koenrh/dnscontrol:v3.13.1@sha256:c70232b8aafafd5a62a24deb31cdadc5aa76f0579bf2fefbce180b9bd8e4b2c4
 
 LABEL repository="https://github.com/koenrh/dnscontrol-action"
 LABEL maintainer="Koen Rouwhorst <info@koenrouwhorst.nl>"
