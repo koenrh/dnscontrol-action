@@ -1,7 +1,7 @@
 ---
-name: DNSControl Action
-description: Deploy your DNS configuration to multiple providers
-author: Koen Rouwhorst <info@koenrouwhorst.nl>
+name: DNSControl CLI Action
+description: Check, preview and deploy your DNS configuration to multiple providers
+author: William Gérald Blondel <contact@williamblondel.fr>
 branding:
   icon: cloud
   color: yellow
