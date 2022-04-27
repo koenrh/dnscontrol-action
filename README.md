@@ -167,16 +167,21 @@ and then define the `creds.json` file as follows.
 }
 ```
 
-## Keep up-to-date with GitHub Dependabot
+## Dependabot
 
-Since [Dependabot](https://docs.github.com/en/github/administering-a-repository/keeping-your-actions-up-to-date-with-github-dependabot)
-has [native GitHub Actions support](https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem),
-to enable it on your GitHub repo all you need to do is add the `.github/dependabot.yml` file:
+[Dependabot](https://docs.github.com/en/github/administering-a-repository/keeping-your-actions-up-to-date-with-github-dependabot)
+is a GitHub service that helps developers to automate dependency maintenance and
+keep dependencies updated to the latest versions. It has native support for
+[GitHub Actions](https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem),
+which means you can use it in your GitHub repository to keep the DNSConrol Acion
+up-to-date.
+
+To enable Dependabot in your GitHub repository, add a `.github/dependabot.yml`
+file with the following contents:
 
 ```yaml
 version: 2
 updates:
-  # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
