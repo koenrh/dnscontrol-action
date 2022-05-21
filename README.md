@@ -162,6 +162,7 @@ and then define the `creds.json` file as follows.
 ```json
 {
   "cloudflare":{
+    "TYPE": "CLOUDFLAREAPI",
     "apitoken": "$CLOUDFLARE_API_TOKEN"
   }
 }
