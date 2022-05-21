@@ -51,7 +51,7 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: DNSControl preview
         uses: koenrh/dnscontrol-action@v3
@@ -131,7 +131,7 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: DNSControl push
         uses: koenrh/dnscontrol-action@v3
