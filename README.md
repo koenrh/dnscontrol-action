@@ -51,7 +51,7 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: DNSControl preview
         uses: koenrh/dnscontrol-action@v3
@@ -99,7 +99,7 @@ GitHub Action.
 
 ```yaml
 - name: Preview pull request comment
-  uses: unsplash/comment-on-pr@v1.2.0
+  uses: unsplash/comment-on-pr@v1.3.0
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -112,7 +112,7 @@ GitHub Action.
 
 ### push
 
-Run the action with the 'push' arugment to publish the changes to the specified
+Run the action with the 'push' argument to publish the changes to the specified
 DNS providers.
 
 Running the action with the 'push' argument will publish the changes with the
@@ -131,7 +131,7 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: DNSControl push
         uses: koenrh/dnscontrol-action@v3
