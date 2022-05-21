@@ -112,7 +112,7 @@ GitHub Action.
 
 ### push
 
-Run the action with the 'push' arugment to publish the changes to the specified
+Run the action with the 'push' argument to publish the changes to the specified
 DNS providers.
 
 Running the action with the 'push' argument will publish the changes with the
