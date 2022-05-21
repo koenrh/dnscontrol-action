@@ -99,7 +99,7 @@ GitHub Action.
 
 ```yaml
 - name: Preview pull request comment
-  uses: unsplash/comment-on-pr@v1.2.0
+  uses: unsplash/comment-on-pr@v1.3.0
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
