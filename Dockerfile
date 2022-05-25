@@ -1,4 +1,4 @@
-FROM golang:1.18.2-alpine@sha256:e6b729ae22a2f7b6afcc237f7b9da3a27151ecbdcd109f7ab63a42e52e750262 AS install
+FROM golang:1.18.2-alpine@sha256:fc40d64be9455a422d513f216acbdd015332275f250c397421c810d2df9c41ae AS install
 
 LABEL repository="https://github.com/koenrh/dnscontrol-action"
 LABEL maintainer="Koen Rouwhorst <info@koenrouwhorst.nl>"
