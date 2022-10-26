@@ -2,17 +2,6 @@
 
 set -o pipefail
 
-escape() {
-  local input="$1"
-
-  # https://github.community/t/set-output-truncates-multiline-strings/16852/3
-  input="${input//'%'/'%25'}"
-  input="${input//$'\n'/'%0A'}"
-  input="${input//$'\r'/'%0D'}"
-
-  echo "$input"
-}
-
 # Resolve to full paths
 CONFIG_ABS_PATH="$(readlink -f "${INPUT_CONFIG_FILE}")"
 CREDS_ABS_PATH="$(readlink -f "${INPUT_CREDS_FILE}")"
@@ -39,10 +28,16 @@ echo "$OUTPUT"
 # Filter output to reduce 'preview' PR comment length
 FILTERED_OUTPUT="$(echo "$OUTPUT" | /filter-preview-output.sh)"
 
-OUTPUT="$(escape "$OUTPUT")"
-FILTERED_OUTPUT="$(escape "$FILTERED_OUTPUT")"
+# Set output
+# https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
+DELIMITER="DNSCONTROL-$RANDOM"
 
-echo "::set-output name=output::$OUTPUT"
-echo "::set-output name=preview_comment::$FILTERED_OUTPUT"
+echo "output<<$DELIMITER" >> $GITHUB_OUTPUT
+echo "$OUTPUT" >> $GITHUB_OUTPUT
+echo "$DELIMITER" >> $GITHUB_OUTPUT
+
+echo "preview_comment<<$DELIMITER" >> $GITHUB_OUTPUT
+echo "$FILTERED_OUTPUT" >> $GITHUB_OUTPUT
+echo "$DELIMITER" >> $GITHUB_OUTPUT
 
 exit $EXIT_CODE
