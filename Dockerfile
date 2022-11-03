@@ -8,8 +8,8 @@ LABEL "com.github.actions.description"="Deploy your DNS configuration to multipl
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="yellow"
 
-ENV DNSCONTROL_VERSION="3.18.1"
-ENV DNSCONTROL_CHECKSUM="a8a2582b8bb4a32e70f3cabfdfea8b53c2a420bd1714332af15d52f69092fb21"
+ENV DNSCONTROL_VERSION="3.23.0"
+ENV DNSCONTROL_CHECKSUM="1c8eb2aba6e543d29f922fb3128bb37a87372ba70f2c3acb660b660a4bc7806f"
 
 RUN apk -U --no-cache upgrade && \
     apk add --no-cache bash ca-certificates curl libc6-compat
