@@ -42,7 +42,7 @@ FILTERED_OUTPUT="$(echo "$OUTPUT" | /filter-preview-output.sh)"
 OUTPUT="$(escape "$OUTPUT")"
 FILTERED_OUTPUT="$(escape "$FILTERED_OUTPUT")"
 
-echo "::set-output name=output::$OUTPUT"
-echo "::set-output name=preview_comment::$FILTERED_OUTPUT"
+echo "output=$OUTPUT" >> $GITHUB_OUTPUT
+echo "preview_comment=$FILTERED_OUTPUT" >> $GITHUB_OUTPUT
 
 exit $EXIT_CODE
