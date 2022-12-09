@@ -32,12 +32,14 @@ FILTERED_OUTPUT="$(echo "$OUTPUT" | /filter-preview-output.sh)"
 # https://github.com/orgs/community/discussions/26288#discussioncomment-3876281
 DELIMITER="DNSCONTROL-$RANDOM"
 
-echo "output<<$DELIMITER" >> "$GITHUB_OUTPUT"
-echo "$OUTPUT" >> "$GITHUB_OUTPUT"
-echo "$DELIMITER" >> "$GITHUB_OUTPUT"
+{
+  echo "output<<$DELIMITER"
+  echo "$OUTPUT"
+  echo "$DELIMITER"
 
-echo "preview_comment<<$DELIMITER" >> "$GITHUB_OUTPUT"
-echo "$FILTERED_OUTPUT" >> "$GITHUB_OUTPUT"
-echo "$DELIMITER" >> "$GITHUB_OUTPUT"
+  echo "preview_comment<<$DELIMITER"
+  echo "$FILTERED_OUTPUT"
+  echo "$DELIMITER"
+} >> "$GITHUB_OUTPUT"
 
 exit $EXIT_CODE
