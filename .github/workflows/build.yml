@@ -15,3 +15,6 @@ jobs:
 
       - name: ShellCheck
         run: shellcheck entrypoint.sh
+
+      - name: Build image
+        uses: docker/build-push-action@v4
