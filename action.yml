@@ -1,5 +1,5 @@
 ---
-name: DNSControl Action with Fetch
+name: DNSControl Action with fetch functionality
 description: Deploy your DNS configuration to multiple providers
 author: Jniklas2 <github@sl.crcr.tech>
 branding:
