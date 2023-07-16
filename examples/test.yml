@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Preview
-        uses: koenrh/dnscontrol-action@v3
+        uses: jniklas2/dnscontrol-action@v3
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_API_USER: ${{ secrets.CLOUDFLARE_API_USER }}

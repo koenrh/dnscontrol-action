@@ -1,7 +1,7 @@
 ---
-name: DNSControl Action
+name: DNSControl Action with fetch
 description: Deploy your DNS configuration to multiple providers
-author: Koen Rouwhorst <info@koenrouwhorst.nl>
+author: Jniklas2 <github@sl.crcr.tech>
 branding:
   icon: cloud
   color: yellow
@@ -17,6 +17,9 @@ inputs:
     description: Path to DNSControl credentials file.
     required: false
     default: 'creds.json'
+  allow_fetch:
+    description: Enable the fetch function.
+    required: false
 outputs:
   output:
     description: The output of the dnscontrol command that was executed.
