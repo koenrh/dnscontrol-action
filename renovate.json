@@ -1,5 +1,7 @@
 {
   "extends": [
-    "config:base"
-  ]
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "renovateFork": true
 }
