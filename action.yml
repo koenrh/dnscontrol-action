@@ -20,6 +20,11 @@ inputs:
   allow_fetch:
     description: Enable the fetch function.
     required: false
+    default: 'false'
+  disable_ordered_update:
+    description: Disable the ordered update function.
+    required: false
+    default: 'false'
 outputs:
   output:
     description: The output of the dnscontrol command that was executed.

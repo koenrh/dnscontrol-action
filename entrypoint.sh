@@ -6,10 +6,15 @@ set -o pipefail
 CONFIG_ABS_PATH="$(readlink -f "${INPUT_CONFIG_FILE}")"
 CREDS_ABS_PATH="$(readlink -f "${INPUT_CREDS_FILE}")"
 ALLOW_FETCH="${ALLOW_FETCH:-false}"
+DISABLE_ORDERED_UPDATE="${DISABLE_ORDERED_UPDATE:-false}"
 
 WORKING_DIR="$(dirname "${CONFIG_ABS_PATH}")"
 cd "$WORKING_DIR" || exit
 ARGS=()
+
+if [ "$DISABLE_ORDERED_UPDATE" = true ]; then
+  ARGS+=(--disableordering)
+fi
 
 if [ "$ALLOW_FETCH" = true ]; then
   ARGS+=(--allow-fetch)
