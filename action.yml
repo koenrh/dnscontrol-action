@@ -17,6 +17,10 @@ inputs:
     description: Path to DNSControl credentials file.
     required: false
     default: 'creds.json'
+  enable_colors:
+    description: Enable colors in the output.
+    required: false
+    default: 'false'
   allow_fetch:
     description: Enable the fetch function.
     required: false

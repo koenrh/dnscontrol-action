@@ -9,7 +9,8 @@ LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="yellow"
 
 RUN apk -U --no-cache upgrade && \
-    apk add --no-cache bash ca-certificates curl libc6-compat
+    apk add --no-cache --upgrade bash ca-certificates curl grep libc6-compat && \
+    update-ca-certificates
 
 RUN ["dnscontrol", "version"]
 

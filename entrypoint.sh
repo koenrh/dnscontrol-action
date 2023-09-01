@@ -7,10 +7,15 @@ CONFIG_ABS_PATH="$(readlink -f "${INPUT_CONFIG_FILE}")"
 CREDS_ABS_PATH="$(readlink -f "${INPUT_CREDS_FILE}")"
 ALLOW_FETCH="${ALLOW_FETCH:-false}"
 DISABLE_ORDERED_UPDATE="${DISABLE_ORDERED_UPDATE:-false}"
+ENABLE_COLORS="${ENABLE_COLORS:-false}"
 
 WORKING_DIR="$(dirname "${CONFIG_ABS_PATH}")"
 cd "$WORKING_DIR" || exit
 ARGS=()
+
+if [ "$ENABLE_COLORS" = false ]; then
+  ARGS+=(--no-colors)
+fi
 
 if [ "$DISABLE_ORDERED_UPDATE" = true ]; then
   ARGS+=(--disableordering)
