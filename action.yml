@@ -30,5 +30,5 @@ outputs:
     description: The output of the dnscontrol command that was executed.
 runs:
   using: docker
-  # image: 'Dockerfile'
-  image: 'docker://ghcr.io/jniklas2/dnscontrol-action:v4.1.1-1'
+  image: 'Dockerfile'
+  # image: 'docker://ghcr.io/jniklas2/dnscontrol-action:v4.3.0'
