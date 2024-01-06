@@ -1,4 +1,4 @@
-FROM stackexchange/dnscontrol:4.6.3@sha256:a2838dd29b1a9cb0d0d0cfbc867441fba7b84f43ef35686adae3a5e9c44104e4
+FROM ghcr.io/stackexchange/dnscontrol:4.7.3@sha256:a1c86b307da3bd6623caefb109cc15bc6264b06f4312d265e5c8385191f1c136
 
 LABEL repository="https://github.com/Jniklas2/DNSControl-Action"
 LABEL maintainer="Jniklas2 <github@sl.crcr.tech>"
@@ -14,5 +14,5 @@ RUN apk -U --no-cache upgrade && \
 
 RUN ["dnscontrol", "version"]
 
-COPY README.md entrypoint.sh bin/filter-preview-output.sh /
+COPY entrypoint.sh bin/filter-preview-output.sh /
 ENTRYPOINT ["/entrypoint.sh"]
